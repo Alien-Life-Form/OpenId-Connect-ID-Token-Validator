@@ -12,7 +12,7 @@ This code provides the basic steps required to locally verify an ID Token signed
 ### What is a `token` and how to get it?
 
 The `token` would be any valid ID Token. Assuming we are using the Authorization Code Flow, to get a valid ID Token:
-1. Make a call to the `/auth` endpoint to receive the `authorization code` (used in step 2.)
+1. Make a call to the `/auth` endpoint to receive the `authorization code`
 2. Make a call to the `/oidc/token` enpoint to receive the `token`
 
 OneLogin has a clear explanation of the Authorization Code Flow:
