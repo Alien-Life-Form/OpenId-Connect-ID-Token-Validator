@@ -37,7 +37,7 @@ If no `nonce` is passed when making a call to the `/auth` endpoint, the value of
 
 ### What is a `wellKnownURL` and how to get it?
 
-When registering your app with the Identity Provider they will give you the `Client ID`, `Client Secret`, and `.well-known/openid-configuration` endpoint. Usually making a request to the `.well-known/openid-configuration` endpoint returns a JSON object containing information about the Identity Provider (eg. supported scopes and claims, keys used to sign the tokens) the clients may use this information to construct a valid request to the Identity Provider.
+When registering your app with the Identity Provider they will give you the `Client ID`, `Client Secret`, and `.well-known/openid-configuration` endpoint. Usually making a request to the `.well-known/openid-configuration` endpoint returns a JSON object containing information about the Identity Provider (eg. supported scopes and claims, keys used to sign the tokens), the clients may use this information to construct a valid request to the Identity Provider.
 
 ### Links
 - https://developer.okta.com/authentication-guide/tokens/validating-id-tokens
