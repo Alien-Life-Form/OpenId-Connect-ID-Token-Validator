@@ -13,7 +13,7 @@ This code provides the basic steps required to locally verify an ID Token signed
 
 The `token` would be any valid ID Token. Assuming we are using the Authorization Code Flow, to get a valid ID Token:
 1. Make a call to the `/auth` endpoint to receive the `authorization code`
-2. Make a call to the `/oidc/token` enpoint to receive an ID Token as well as other information
+2. Make a call to the `/oidc/token` enpoint to receive an ID Token as well as other data
 
 OneLogin has a clear explanation of the Authorization Code Flow:
 1. https://developers.onelogin.com/openid-connect/api/authorization-code
@@ -31,7 +31,13 @@ The `audience` is the particular audience - the client, usually this will be the
 
 ### What is a `nonce` and where to find it?
 
+The `nonce` is a random string that is used by the Identity Provider to protect against replay attacks. When making a call to the `/auth` endpoint you may pass a value for the `nonce` as such - `/auth?nonce=123`. There exists a `nonce` claim in the ID Token whose value matches the value passed to the `/auth` endpoint.
+
+If no `nonce` is passed when making a call to the `/auth` endpoint, the value of the `nonce` claim will be `"undefined"` or `""`.
+
 ### What is a `wellKnownURL` and how to get it?
+
+When registering your app with the Identity Provider they will give you the `Client ID`, `Client Secret`, and `.well-known/openid-configuration` endpoint. Usually making a request to the `.well-known/openid-configuration` endpoint returns a JSON object containing information about the Identity Provider (eg. supported scopes and claims, keys used to sign the tokens) the clients may use this information to construct a valid request to the Identity Provider.
 
 ### Links
 - https://developer.okta.com/authentication-guide/tokens/validating-id-tokens
