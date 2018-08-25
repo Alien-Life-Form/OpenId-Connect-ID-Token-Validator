@@ -1,7 +1,7 @@
 # :crown: :trophy: :moneybag: OIDC-JWT-Validator
 
 This code provides the basic steps required to locally verify an ID Token signed using asymmetric encryption (RS256). It uses packages from Microsoft for key parsing and token validation. The code is also testable and comes with a suite of unit tests.
-token, string issuer, string audience, string nonce, string wellKnownURL
+
 # Definitions
 
 ### What is a `token` and how to get it?
