@@ -31,7 +31,7 @@ The `audience` is the particular audience - the client, usually this will be the
 
 ### What is a `nonce` and where to find it?
 
-The `nonce` is a random string that is used by the Identity Provider to protect against replay attacks. When making a call to the `/auth` endpoint you may pass a value for the `nonce` as such - `/auth?nonce=123`. There exists a `nonce` claim in the ID Token whose value matches the value passed to the `/auth` endpoint.
+The `nonce` is a random string that is used by the Identity Provider to protect against replay attacks. When making a call to the `/auth` endpoint you may pass a value for the `nonce` as such - `/auth?nonce=123`. There exists a `nonce` claim in the ID Token whose value matches the value passed in the `/auth` endpoint.
 
 If no `nonce` is passed when making a call to the `/auth` endpoint, the value of the `nonce` claim will be `"undefined"` or `""`.
 
