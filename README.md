@@ -5,7 +5,7 @@ This code provides the basic steps required to locally verify an ID Token signed
 # Authentication vs. Authorization
 
 - Authentication = who you are (eg. username + password)
-- Authorization = permissions (eg. what you are allowed to do - read, write, execute)
+- Authorization = what you are allowed to do (eg. permissions - read, write, execute)
 
 # Definitions
 
