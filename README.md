@@ -2,6 +2,8 @@
 
 This code provides the basic steps required to locally verify an ID Token signed using asymmetric encryption (RS256). It uses packages from Microsoft for key parsing and token validation. The code is also testable and comes with a suite of unit tests.
 
+# How to Run
+
 # Authentication vs. Authorization
 
 - Authentication = who you are (eg. username + password)
@@ -45,7 +47,41 @@ When registering your app with the Identity Provider they will give you the `Cli
 
 # Testable vs Non-Testable Code
 
-# How to Run
+When testing code no external activity (eg. HTTP requests) are allowed, each unit test has to be self-contained. This means that all external activity has to be mocked. The first version of `ValidateOpenIdConnectJSONWebToken()` was non-testable since it was making a request - `await configurationManager.GetConfigurationAsync(ct);` inside of the method.
+
+Therefore, I had to create a second version of `ValidateOpenIdConnectJSONWebToken()`, where a few extra parameters had to be added to the method signature in order to make the method testable.
+
+### How mocking works?
+
+For mocking external activity I used the Moq framework, which is the "the most popular and friendly mocking framework for .NET".
+
+```C#
+// A either has to be an interface or an abstract class, 
+// it may also be a regular class as long as B is a virtual method
+Mock<A> mock = new Mock<A>(MockBehavior.Strict);
+
+// B either has to be a method declared in the an interface or an abstract class, 
+// or be virtual method in a regular class
+// R is any valid entity of return type of B
+mock.Setup(m => m.B).Returns(R);
+
+// When B is trigger on mock.Object, R is returned
+ValidateOpenIdConnectJSONWebToken(..., mock.Object, ...);
+```
+
+Such specific properties are required from `A` and `B`, because Moq will create its own version of `B` (for that it either needs to extend `A` and override `B` or implement `A` and define `B`) that follows the requirement set by the `Setup` and `Returns` method calls.
+
+### What is the point for `CustomOpenIdConnectConfiguration.cs` and `IOpenIdConnectConfiguration.cs`?
+
+`SigningKeys` is part of a regular class and it is not a virtual property, therefore it must be declared in an interface or an abstract class. That's why I created a custom interface - needed for mocking and a class that implements it - needed for regular usage.
+
+### Why not pass `SigningKeys` instead of `discoveryDocument`?
+
+`SigningKeys` is only a getter property, so we have to tell the property exactly what to return.
+
+### Why pass `validateLifetime`?
+
+It is possible for an ID Token to expire, and the `ValidateLifetime` property in `validationParameters` checks for that. In order to save time and not having to go through the process of generating a new token every time the unit tests have to be ran, adding an option to avoid checking for token experation allows the same token to be used for testing.
 
 # Kudos
 - https://stackoverflow.com/questions/47121732/how-to-properly-consume-openid-connect-jwks-uri-metadata-in-c
