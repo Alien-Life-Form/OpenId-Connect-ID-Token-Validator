@@ -53,7 +53,7 @@ Therefore, I had to create a second version of `ValidateOpenIdConnectJSONWebToke
 
 ### How mocking works?
 
-For mocking external activity I used the Moq framework, which is the "the most popular and friendly mocking framework for .NET".
+For mocking external activity I used the Moq.NET framework.
 
 ```C#
 // A either has to be an interface or an abstract class, 
