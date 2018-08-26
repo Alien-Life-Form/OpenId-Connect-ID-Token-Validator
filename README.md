@@ -23,6 +23,8 @@ OneLogin has a clear explanation of the Authorization Code Flow:
 
 An ID Token usually comes in a form of a JSON Web Token (JWT). [Here](https://jwt.io/introduction/) is a good read on JWTs.
 
+Use [this](https://jwt.io/) to parse the ID Token.
+
 ### What is an `issuer` and where to find it?
 
 The `issuer` is the issuing authority - whoever gave you the ID Token, usually this will be the Identity Provider (eg. AzureAD, OneLogin), and it is nothing more than the value of the `iss` claim from the ID Token.
