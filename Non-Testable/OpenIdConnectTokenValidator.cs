@@ -26,6 +26,7 @@ public class OpenIdConnectTokenValidator
         if (string.IsNullOrEmpty(issuer)) throw new ArgumentNullException(nameof(issuer));
         if (string.IsNullOrEmpty(audience)) throw new ArgumentNullException(nameof(audience));
         if (string.IsNullOrEmpty(nonce)) throw new ArgumentNullException(nameof(nonce));
+        if (string.IsNullOrEmpty(wellKnownURL)) throw new ArgumentNullException(nameof(wellKnownURL));
 
         CancellationToken ct = default(CancellationToken);
 
