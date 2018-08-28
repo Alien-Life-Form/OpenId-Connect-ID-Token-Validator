@@ -25,6 +25,12 @@ public class OpenIdConnectTokenValidator
     /// <returns>True if the token is valid, false otherwise</returns>
     public async Task<bool> ValidateOpenIdConnectJSONWebTokenWrapperAsync(string token, string issuer, string audience, string nonce, string wellKnownUrl) 
     {
+        if (string.IsNullOrEmpty(token)) throw new ArgumentNullException(nameof(token));
+        if (string.IsNullOrEmpty(issuer)) throw new ArgumentNullException(nameof(issuer));
+        if (string.IsNullOrEmpty(audience)) throw new ArgumentNullException(nameof(audience));
+        if (string.IsNullOrEmpty(nonce)) throw new ArgumentNullException(nameof(nonce));
+        if (string.IsNullOrEmpty(wellKnownUrl)) throw new ArgumentNullException(nameof(wellKnownUrl));
+        
         ConfigurationManager<OpenIdConnectConfiguration> configurationManager = new ConfigurationManager<OpenIdConnectConfiguration>(
             issuer + wellKnownUrl,
             new OpenIdConnectConfigurationRetriever(),
@@ -59,6 +65,8 @@ public class OpenIdConnectTokenValidator
         if (string.IsNullOrEmpty(issuer)) throw new ArgumentNullException(nameof(issuer));
         if (string.IsNullOrEmpty(audience)) throw new ArgumentNullException(nameof(audience));
         if (string.IsNullOrEmpty(nonce)) throw new ArgumentNullException(nameof(nonce));
+        if (discoveryDocument == null) throw new ArgumentNullException(nameof(discoveryDocument));
+        if (validateLifetime == null) throw new ArgumentNullException(nameof(validateLifetime));
 
         ICollection<SecurityKey> signingKeys = discoveryDocument.SigningKeys;
 
