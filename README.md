@@ -1,8 +1,38 @@
 # :crown: :trophy: :moneybag: OIDC-JWT-Validator
 
+I spent a lot of time searching for a way to validate OpenId-Connect ID Tokens, but I spent even more time searching for a way to make my code testable by trying to mock the `SigningKeys`. I want to share this code with the world, and hopefully someone else finds it useful!
+
 This code provides the basic steps required to locally verify an ID Token signed using asymmetric encryption (RS256). It uses packages from Microsoft for key parsing and token validation. The code is also testable and comes with a suite of unit tests.
 
+P.S. If you want more information about OpenId-Connect, ID Tokens, Authentication vs. Authorization, Testable vs Non-Testable Code, Mocking and this repo in general continue reading after the "How to Run" section, and of course - 
+
+Please send me your feedback!
+
 # How to Run
+
+### Testable
+```C#
+string token = "...";
+string issuer = "...";
+string audience = "...";
+string nonce = "...";
+string wellKnownURL = "...";
+
+OpenIdConnectTokenValidator oidcTokenValidator = new OpenIdConnectTokenValidator();
+bool result = await oidcTokenValidator.ValidateOpenIdConnectJSONWebTokenWrapperAsync(token, issuer, audience, nonce, wellKnownURL)
+```
+
+### Non-testable
+```C#
+string token = "...";
+string issuer = "...";
+string audience = "...";
+string nonce = "...";
+string wellKnownURL = "...";
+
+OpenIdConnectTokenValidator oidcTokenValidator = new OpenIdConnectTokenValidator();
+bool result = await oidcTokenValidator.ValidateOpenIdConnectJSONWebTokenAsync(token, issuer, audience, nonce, wellKnownURL);
+```
 
 # Authentication vs. Authorization
 
