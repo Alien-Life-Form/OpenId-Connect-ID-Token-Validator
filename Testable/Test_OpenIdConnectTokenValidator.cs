@@ -161,6 +161,42 @@ public class Test_OpenIdConnectTokenValidator
         bool result = validator.ValidateOpenIdConnectJSONWebToken(token, issuer, audience, nonce, _discoveryDocument.Object, false);
         Assert.AreEqual(false, result);
     }
+    
+    [TestMethod]
+    public async Task NullValidateLifetimeThrowsArgumentNullException()
+    {
+        var keys = new List<SecurityKey>();
+        _discoveryDocument.SetupGet(d => d.SigningKeys).Returns(keys);
+
+        var validator = new OpenIdConnectTokenValidator();
+
+        try
+        {
+            bool result = validator.ValidateOpenIdConnectJSONWebToken(token, issuer, audience, nonce, _discoveryDocument.Object, null);
+        }
+        catch (Exception exception)
+        {
+            Assert.IsTrue(exception is ArgumentNullException);
+        }
+    }
+    
+    [TestMethod]
+    public async Task NullDiscoveryDocumentThrowsArgumentNullException()
+    {
+        var keys = new List<SecurityKey>();
+        _discoveryDocument.SetupGet(d => d.SigningKeys).Returns(keys);
+
+        var validator = new OpenIdConnectTokenValidator();
+
+        try
+        {
+            bool result = validator.ValidateOpenIdConnectJSONWebToken(token, issuer, audience, nonce, null, false);
+        }
+        catch (Exception exception)
+        {
+            Assert.IsTrue(exception is ArgumentNullException);
+        }
+    }
 
     [TestMethod]
     public async Task EmptyAudienceThrowsArgumentNullException()
@@ -242,7 +278,6 @@ public class Test_OpenIdConnectTokenValidator
             Assert.IsTrue(exception is ArgumentNullException);
         }
     }
-
 
     [TestMethod]
     public async Task ValidKeyReturnsTrue()
