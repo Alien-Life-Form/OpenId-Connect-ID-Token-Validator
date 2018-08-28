@@ -101,7 +101,7 @@ mock.Setup(m => m.B).Returns(R);
 ValidateOpenIdConnectJSONWebToken(..., mock.Object, ...);
 ```
 
-Such specific properties are required from `A` and `B`, because Moq will create its own version of `B` (for that it either needs to extend `A` and override `B` or implement `A` and define `B`) that follows the requirement set by the `Setup` and `Returns` method calls.
+Such specific properties are required from `A` and `B`, because Moq will create its own version of `B` (for that it either needs to extend `A` and override `B` or implement `A` and define `B`) that follows the requirements set by the `Setup` and `Returns` method calls.
 
 ### What is the point for `CustomOpenIdConnectConfiguration.cs` and `IOpenIdConnectConfiguration.cs`?
 
