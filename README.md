@@ -1,6 +1,6 @@
 # :crown: :trophy: :moneybag: OIDC-JWT-Validator
 
-I spent a lot of time searching for a way to validate OpenId-Connect ID Tokens, but I spent even more time searching for a way to make my code testable by trying to mock the `SigningKeys`. I want to share this code with the world, and hopefully someone else finds it useful!
+I spent a lot of time searching for a way to validate OpenId-Connect ID Tokens, but I spent even more time searching for a way to make my code testable. I want to share this code with the world, and hopefully someone else finds it useful!
 
 This code provides the basic steps required to locally verify an ID Token signed using asymmetric encryption (RS256). It uses packages from Microsoft for key parsing and token validation. The code is also testable and comes with a suite of unit tests.
 
