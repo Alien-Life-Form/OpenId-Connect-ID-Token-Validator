@@ -79,7 +79,7 @@ When registering your app with the Identity Provider they will give you the `Cli
 
 # Testable vs Non-Testable Code
 
-When testing code no external activity (eg. HTTP requests) are allowed, each unit test has to be self-contained. This means that all external activity has to be mocked. The [first version](https://github.com/00111000/OpenIdConnect-JSONWebToken-Validator/tree/master/Non-Testable) of `ValidateOpenIdConnectJSONWebToken()` was non-testable since it was making a request - `await configurationManager.GetConfigurationAsync(ct);` inside of the method.
+When testing code no external activity (eg. HTTP requests) is allowed, each unit test has to be self-contained. This means that all external activity has to be mocked. The [first version](https://github.com/00111000/OpenIdConnect-JSONWebToken-Validator/tree/master/Non-Testable) of `ValidateOpenIdConnectJSONWebToken()` was non-testable since it was making a request - `await configurationManager.GetConfigurationAsync(ct);` inside of the method.
 
 Therefore, I had to create a [second version](https://github.com/00111000/OpenIdConnect-JSONWebToken-Validator/tree/master/Testable) of `ValidateOpenIdConnectJSONWebToken()`, where a few extra parameters had to be added to the method signature in order to make the method testable.
 
