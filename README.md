@@ -4,7 +4,7 @@ I spent a lot of time searching for a way to validate OpenId-Connect ID Tokens, 
 
 This code provides the basic steps required to locally verify an ID Token signed using asymmetric encryption (eg. RS256). It uses packages from Microsoft for key parsing and token validation. The code is also testable and comes with a suite of unit tests.
 
-P.S. If you want more information about OpenId-Connect, ID Tokens, Authentication vs. Authorization, Testable vs Non-Testable Code, Mocking and this repo in general continue reading after the "How to Run" section, and of course - 
+P.S. If you want more information about OpenId-Connect, ID Tokens, Authentication vs Authorization, Testable vs Non-Testable Code, Mocking and this repo in general continue reading after the "How to Run" section, and of course - 
 
 Please send me your feedback!
 
@@ -34,7 +34,7 @@ OpenIdConnectTokenValidator oidcTokenValidator = new OpenIdConnectTokenValidator
 bool result = await oidcTokenValidator.ValidateOpenIdConnectJSONWebTokenAsync(token, issuer, audience, nonce, wellKnownURL);
 ```
 
-# Authentication vs. Authorization
+# Authentication vs Authorization
 
 - Authentication = who you are (eg. username + password)
 - Authorization = what you are allowed to do (eg. permissions - read, write, execute)
