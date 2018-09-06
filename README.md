@@ -93,8 +93,8 @@ For mocking external activity I used the Moq.NET framework.
 Mock<A> mock = new Mock<A>(MockBehavior.Strict);
 
 // B either has to be a method declared in an interface or an abstract class, 
-// or be virtual method in a regular class
-// R is any valid entity of return type of B
+// or be a virtual method in a regular class
+// R is any valid object of return type of B
 mock.Setup(m => m.B).Returns(R);
 
 // When B is trigger on mock.Object, R is returned
