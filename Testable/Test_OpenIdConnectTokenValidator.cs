@@ -16,9 +16,16 @@ public class Test_OpenIdConnectTokenValidator
     private string audience;
     private string nonce;
 
-    private string e;
-    private string n;
-    private string kid;
+    private string e; // Found in a JWK
+    private string n; // Found in a JWK
+    private string kid; // Found in a JWK
+    
+    // A JWKs may be found in a JSON object returned by the .well-known/openid-configuration endpoint
+    // Check the ID Token to find out which JWK to use 
+    // Good read on JWKs - https://auth0.com/docs/jwks
+    
+    // I didn't have to deal with x5t, x5c, etc..., but as far as I understand Identity Providers are moving away
+    // from using these claims...so any modern Identity Provider should provide the kid claim
 
     private static byte[] Base64UrlDecoder(string base64Url)
     {
