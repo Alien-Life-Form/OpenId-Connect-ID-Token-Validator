@@ -19,7 +19,7 @@ string nonce = "...";
 string wellKnownURL = "...";
 
 OpenIdConnectTokenValidator oidcTokenValidator = new OpenIdConnectTokenValidator();
-bool result = await oidcTokenValidator.ValidateOpenIdConnectJSONWebTokenWrapperAsync(token, issuer, audience, nonce, wellKnownURL)
+bool result = await oidcTokenValidator.ValidateOpenIdConnectJSONWebTokenWrapperAsync(token, issuer, audience, nonce, wellKnownURL);
 ```
 
 ### Non-testable
