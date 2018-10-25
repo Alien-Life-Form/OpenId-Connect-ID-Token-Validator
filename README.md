@@ -103,6 +103,8 @@ ValidateOpenIdConnectJSONWebToken(..., mock.Object, ...);
 
 Such specific properties are required from `A` and `B`, because Moq will create its own version of `B` (for that it either needs to extend `A` and override `B` or implement `A` and define `B`) that follows the requirements set by the `Setup` and `Returns` method calls.
 
+# Common Questions
+
 ### What is the point for `CustomOpenIdConnectConfiguration.cs` and `IOpenIdConnectConfiguration.cs`?
 
 `SigningKeys` is part of a regular class and it is not a virtual property, therefore it must be declared in an interface or an abstract class. That's why I created a custom interface - needed for mocking and a class that implements it - needed for regular usage.
