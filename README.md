@@ -97,7 +97,7 @@ Mock<A> mock = new Mock<A>(MockBehavior.Strict);
 // R is any valid object of return type of B
 mock.Setup(m => m.B).Returns(R);
 
-// When B is trigger on mock.Object, R is returned
+// When B is called on mock.Object, R is returned
 ValidateOpenIdConnectJSONWebToken(..., mock.Object, ...);
 ```
 
