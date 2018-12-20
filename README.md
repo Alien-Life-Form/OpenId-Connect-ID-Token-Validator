@@ -10,6 +10,13 @@ Please send me your feedback!
 
 # How to Run
 
+> Remember to prefix the .well-known config URL with a `/`
+
+### Packages
+```
+Install-Package Microsoft.IdentityModel.Protocols.OpenIdConnect -Version 5.3.0
+```
+
 ### Testable
 ```C#
 string token = "...";
@@ -34,7 +41,7 @@ OpenIdConnectTokenValidator oidcTokenValidator = new OpenIdConnectTokenValidator
 bool result = await oidcTokenValidator.ValidateOpenIdConnectJSONWebTokenAsync(token, issuer, audience, nonce, wellKnownURL);
 ```
 
-# Authentication vs Authorization
+# Authentication vs. Authorization
 
 - Authentication = who you are (eg. username + password)
 - Authorization = what you are allowed to do (eg. permissions - read, write, execute)
@@ -77,9 +84,9 @@ When registering your app with the Identity Provider they will give you the `Cli
 - https://developer.okta.com/authentication-guide/tokens/validating-id-tokens
 - https://auth0.com/docs/tokens/id-token
 
-# Testable vs Non-Testable Code
+# Testable vs. Non-Testable Code
 
-When testing code no external activity (eg. HTTP requests) is allowed, each unit test has to be self-contained. This means that all external activity has to be mocked. The [first version](https://github.com/00111000/OpenIdConnect-JSONWebToken-Validator/tree/master/Non-Testable) of `ValidateOpenIdConnectJSONWebToken()` was non-testable since it was making a request - `await configurationManager.GetConfigurationAsync(ct);` inside of the method.
+When writing unit tests, no external activity (eg. HTTP requests) is allowed, each unit test has to be self-contained. This means that all external activity has to be mocked. The [first version](https://github.com/00111000/OpenIdConnect-JSONWebToken-Validator/tree/master/Non-Testable) of `ValidateOpenIdConnectJSONWebToken()` was non-testable since it was making a request - `await configurationManager.GetConfigurationAsync(ct);` inside of the method.
 
 Therefore, I had to create a [second version](https://github.com/00111000/OpenIdConnect-JSONWebToken-Validator/tree/master/Testable) of `ValidateOpenIdConnectJSONWebToken()`, where a few extra parameters had to be added to the method signature in order to make the method testable. I guess taking a TDD approach would help to avoid this.
 
