@@ -20,12 +20,12 @@ public class Test_OpenIdConnectTokenValidator
     private string n; // Found in a JWK
     private string kid; // Found in a JWK
     
-    // A JWKs may be found in a JSON object returned by the .well-known/openid-configuration endpoint
+    // JWKs may be found in a JSON object returned by the .well-known/openid-configuration endpoint
     // Check the ID Token to find out which JWK to use 
     // Good read on JWKs - https://auth0.com/docs/jwks
     
     // I didn't have to deal with x5t, x5c, etc..., but as far as I understand Identity Providers are moving away
-    // from using these claims...so any modern Identity Provider should provide the kid claim
+    // from using these claims ... so any modern Identity Provider should provide the kid claim
 
     private static byte[] Base64UrlDecoder(string base64Url)
     {
@@ -41,14 +41,19 @@ public class Test_OpenIdConnectTokenValidator
     {
         _discoveryDocument = new Mock<IOpenIdConnectConfiguration>(MockBehavior.Strict);
 
-        token = "";
-        issuer = "";
-        audience = "";
-        nonce = "";
+        token = ""; // Insert a sample ID Token
+        
+        // From payload of the ID Token
+        issuer = ""; // Insert a value of the iss claim from the sample ID Token above
+        audience = ""; // Insert a value of the aud claim from the sample ID Token above
+        nonce = ""; // Insert a value of the nonce claim from the sample ID Token above
 
+        // From the header of the ID Token
+        kid = ""; // Insert a value of the kid claim from the sample ID Token above
+        
+        // From JWK associated with kid above
         e = "";
-        n = 
-        kid = "";
+        n = "";
     }
 
     [TestMethod]
@@ -56,6 +61,8 @@ public class Test_OpenIdConnectTokenValidator
     {
         token = "7.7.7";
 
+        // Need the keys array to get passed validationParameters = new TokenValidationParameters()
+        // and execute ValidateToken(token, validationParameters, out rawValidatedToken)
         var keys = new List<SecurityKey>();
         byte[] exponent = Base64UrlDecoder(e);
         byte[] modulus = Base64UrlDecoder(n);
@@ -129,7 +136,6 @@ public class Test_OpenIdConnectTokenValidator
     [TestMethod]
     public async Task ExpiredTokenThrowsSecurityTokenExpiredException()
     {
-
         var keys = new List<SecurityKey>();
         byte[] exponent = Base64UrlDecoder(e);
         byte[] modulus = Base64UrlDecoder(n);
