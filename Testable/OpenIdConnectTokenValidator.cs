@@ -40,11 +40,7 @@ public class OpenIdConnectTokenValidator
         OpenIdConnectConfiguration discoveryDocument = await configurationManager.GetConfigurationAsync(ct);
         CustomOpenIdConnectConfiguration _discoveryDocument = new CustomOpenIdConnectConfiguration(discoveryDocument);
 
-        OpenIdConnectTokenValidator validator = new OpenIdConnectTokenValidator();
-
-        bool result = validator.ValidateOpenIdConnectJSONWebToken(token, issuer, audience, nonce, _discoveryDocument, true);
-
-        return result;
+        return this.ValidateOpenIdConnectJSONWebToken(token, issuer, audience, nonce, _discoveryDocument, true);
     }
 
     /// <summary>
