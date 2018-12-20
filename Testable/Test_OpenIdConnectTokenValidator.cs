@@ -61,7 +61,7 @@ public class Test_OpenIdConnectTokenValidator
     {
         token = "7.7.7";
 
-        // Need the keys array to get passed validationParameters = new TokenValidationParameters()
+        // Need the keys array to get passed validationParameters = new TokenValidationParameters() { ... }
         // and execute ValidateToken(token, validationParameters, out rawValidatedToken)
         var keys = new List<SecurityKey>();
         byte[] exponent = Base64UrlDecoder(e);
@@ -136,6 +136,8 @@ public class Test_OpenIdConnectTokenValidator
     [TestMethod]
     public async Task ExpiredTokenThrowsSecurityTokenExpiredException()
     {
+        // This test relies on the fact that the token is a valid, expired token
+        
         var keys = new List<SecurityKey>();
         byte[] exponent = Base64UrlDecoder(e);
         byte[] modulus = Base64UrlDecoder(n);
@@ -159,6 +161,7 @@ public class Test_OpenIdConnectTokenValidator
     [TestMethod]
     public async Task InvalidNonceThrowsSecurityTokenValidationException()
     {
+        // The real nonce is found in the token, just make this any other value
         nonce = "777";
 
         var keys = new List<SecurityKey>();
